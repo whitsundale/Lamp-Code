@@ -1,0 +1,71 @@
+// Log the URLs to turn LED on/off when agent starts
+#require "Rocky.class.nut:1.3.0"
+local api = null;
+server.log("Turn the LED on by browsing to " + http.agenturl() + "?led=1");
+server.log("Turn the LED off by browsing to " + http.agenturl() + "?led=0");
+
+
+const htmlString = @"
+<!DOCTYPE html>
+<body>
+<p>I'm right here!</p>
+</body>
+</html>
+
+";
+
+api = Rocky();
+// HTTP Request handlers expect two parameters:
+// request: the incoming request
+// response: the response we send back to whoever made the request
+
+function requestHandler(request, response) {
+  // Check if the variable led was passed into the query
+ 
+ // server.log(request);
+    if (request.body == "led=-1") {
+    device.send("led", "-1");
+    server.log("LED Off");      
+  }
+  
+    if (request.body == "led=0") {
+    device.send("led", "0");
+    server.log("LED White");      
+  }
+  
+  if (request.body == "led=1") {
+    device.send("led", "1");
+    server.log("LED Red");    
+  }
+    
+    if (request.body == "led=2") {
+    device.send("led", "2");
+    server.log("LED Orange");   
+  }
+      
+    if (request.body == "led=3") {
+    device.send("led", "3");
+    server.log("LED Yellow");   
+  }
+      
+    if (request.body == "led=4") {
+    device.send("led", "4");
+    server.log("LED Green");   
+  }
+      
+    if (request.body == "led=5") {
+    device.send("led", "5");
+    server.log("LED Blue");   
+  }
+      
+    if (request.body == "led=6") {
+    device.send("led", "6");
+    server.log("LED Purple");   
+  }
+  
+  // send a response back to whoever made the request
+  response.send(200, "OK");
+}
+
+// your agent code should only ever have ONE http.onrequest call.
+http.onrequest(requestHandler);
