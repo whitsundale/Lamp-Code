@@ -13,13 +13,23 @@ function requestHandler(request, response) {
   // Check if the variable led was passed into the query
 
  // server.log(request);
-    if (request.query["led"])
-      device.send("led", request.query["led"]);
-    else if (request.query["red"] && request.query["green"] && request.query["blue"] && request.query["index"]){
-      device.send("ind", request.query)
-    }else {
-      response.send(400, "You must include the LED number or parameters red, green, blue, and index.")
-    }
+    if (request.method == "GET"){
+      if (request.query["led"])
+        device.send("led", request.query["led"]);
+      else if (request.query["red"] && request.query["green"] && request.query["blue"] && request.query["index"])
+        device.send("ind", request.query);
+      else
+        response.send(400, "You must include the LED number or parameters red, green, blue, and index.");
+    }else if (request.method == "POST") {
+      q = http.jsondecode(request.query);
+      if (q["led"])
+        device.send("led", q["led"]);
+      else if (q["red"] && q["green"] && q["blue"] && q["index"])
+        device.send("ind", request.query);
+      else
+        response.send(400, "You must include the LED number or parameters red, green, blue, and index.");
+    }else
+      response.send(400, "You must use either GET or POST.");
 
   // send a response back to whoever made the request
   response.send(200, "OK");
