@@ -1,7 +1,7 @@
 var count = 1;
 
 function increment() {
-  document.getElementById('custom').innerHTML += "\n<input type=\"number\" value=\"" + count.toString() + "\">\n<input type=\"color\">";
+  document.getElementById('custom').innerHTML += "\n<input type=\"number\" value=\"" + count.toString() + "\" id=\"value" + count.toString() + "\">\n<input type=\"color\">";
   count++;
 }
 
@@ -15,6 +15,9 @@ function decrement() {
     setTimeout(removeAlert, 3000);
     return
   }
-  document.getElementById('custom').innerHTML.replace("\n<input type=\"number\" value=\"" + count.toString() + "\">\n<input type=\"color\">", "");
+  document.getElementById('custom').innerHTML.replace("\n<input type=\"number\" value=\"" + (count - 1).toString() + "\" id=\"value" + (count - 1).toString() + "\">\n<input type=\"color\">", "");
   count--;
 }
+
+function subm() {
+  var xml = new XMLHttpRequest()
