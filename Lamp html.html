@@ -15,11 +15,14 @@
 		});
 	});
 </script>
+	<script type="text/javascript" src="Custom.js"></script>
 </head>
 <body>
 	Imp time!
 
-
+	<noscript>
+		Please turn on Javascript for the things that we need.
+	</noscript>
             <form>
 		<input type = "hidden" id="led" name = "led" value = "-1">
 		<input type = "submit" value = "Turn LED Off">
@@ -52,6 +55,11 @@
 		<input type = "hidden" id="led" name = "led" value = "6">
 		<input type = "submit" value = "Turn LED to Purple">
 	</form>
+	<form id="custom">
+		<input type="number" value="0">
+		<input type="color">
+	</form>
+	<button type="submit" formaction="javascript:subm()">Submit color</button>
   <form>
   </form>
 </body>
