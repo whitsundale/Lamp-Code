@@ -23,5 +23,5 @@ function subm() {
   var webp = "https://agent.electricimp.com/LbCwF8_YvW3f"
   $.get(webp, function(data, status){
     if (status != "success")
-      alert("Send failed. Please try again.");
+      alert("Send failed. Please try again. Message:" + data);
   });
